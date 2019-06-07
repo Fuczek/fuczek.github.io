@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+</head>
+
+<body>
+    <div id="container">
+        <div id="menu">
+            <div class="logo">Pierożkomat</div>
+
+            <ul style="list-style-type:none;">
+                <li class="toplist"><button type="button" onclick="smoothScroll(document.getElementById('main'))">Projekt</button></li>
+                <li class="toplist"><button type="button" onclick="smoothScroll(document.getElementById('help'))">Jak to działa?</li>
+                <li class="toplist"><button type="button" onclick="smoothScroll(document.getElementById('about'))">Nasze sekrety</li>
+                <li class="toplist"><button type="button" onclick="smoothScroll(document.getElementById('contact'))">Kontakt</li>
+            </ul>
+        </div>
+        
+        <div id="main">
+            <div id="titletext">
+                <h1> Brakuje czasu by zjeść pożywny posiłek?</h1>
+                <h2> Skorzystaj z naszych automatów w całej Polsce!</h2>
+            </div>
+            <div id="image">
+                <img id="pierog", src="pierog.png"></img>
+                <div id="circle"></div>
+            </div>
+        </div>
+        <div id="help">
+            <div class="a0">Jak działa pierożkomat?</div>
+            <div class="a1">1. </br>
+                Wybierz swój przysmak i dokonaj płatności kartą lub gotówką</div>
+            <div class="a2">2. </br>
+                W ciągu 3 minut pierożkomat przygotuje twój ciepły posiłek</div>
+            <div class="a3">3. </br>
+                Pora na odbiór zamówienia! Smacznego!</div>
+        </div>
+        <div id="about">
+            <div class="b0">Nasze sekrety</div>
+            <div class="b1">
+                <img id="image2", src="image2.png"></img>
+            </div>
+            <div class="b2">Nasze pierogi są tworzone we współpracy z najlepszymi ekspertami w tej
+                    dziedzinie – babciami. Dzięki temu wiemy, że zawsze będą one pyszne i
+                    przygotowywane z pasją według tradycyjnego przepisu. </div>
+        </div>
+        <div id="contact">
+            <div class="d0">Skontaktuj się z nami i zaopatrz swoje miasto w Pierożkomat!</div>
+            <div class="d1">rozwoj@pierozkomat.pl</div>
+        </div>
+        <div id="footer">
+            <div class="c0">Inżynieria Zarządzania, I rok, pon 9:15-11:00 TP</div>
+            <div class="c1">
+                Kuba Ogłuszka 246832 </br>
+                Daria Robakiewicz 247051
+            </div>
+            <div class="c2">
+                Maciej Respondek 247038  </br>
+                Milena Szafran 246859
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.smoothScroll = function(target) {
+            var scrollContainer = target;
+            do { //find scroll container
+                scrollContainer = scrollContainer.parentNode;
+                if (!scrollContainer) return;
+                scrollContainer.scrollTop += 1;
+            } while (scrollContainer.scrollTop == 0);
+
+            var targetY = 0;
+            do { //find the top of target relatively to the container
+                if (target == scrollContainer) break;
+                targetY += target.offsetTop;
+            } while (target = target.offsetParent);
+
+            scroll = function(c, a, b, i) {
+                i++; if (i > 30) return;
+                c.scrollTop = a + (b - a) / 30 * i;
+                setTimeout(function(){ scroll(c, a, b, i); }, 20);
+            }
+            // start scrolling
+            scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenLite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/CSSPlugin.min.js"></script>
+
+    <script>
+        var pierog = document.getElementById("pierog");
+        TweenLite.from(pierog, 1.5, {y: -4000, ease: Power3.easeIn});
+        var circle = document.getElementById("circle");
+        TweenLite.from(circle, 1.5, {scale:0, ease: Power3.easeIn});
+
+        var menu = document.getElementById("menu");
+        TweenLite.from(menu, 0.7, {y: 1000, ease: Power2.easeInOut});
+        var main = document.getElementById("main");
+        TweenLite.from(main, 0.9, {y: 1500, ease: Power2.easeInOut});
+        var help = document.getElementById("help");
+        TweenLite.from(help, 1.1, {y: 1800, ease: Power2.easeInOut});
+        var about = document.getElementById("about");
+        TweenLite.from(about, 1.3, {y: 1800, ease: Power2.easeInOut});
+        var contact = document.getElementById("contact");
+        TweenLite.from(contact, 1.3, {y: 1000, ease: Power2.easeInOut});
+        var footer = document.getElementById("footer");
+        TweenLite.from(footer, 1.3, {y: 1800, ease: Power2.easeInOut});
+
+
+    </script>
+</body>
+
+</html>
